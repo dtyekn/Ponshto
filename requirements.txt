@@ -1,2 +1,4 @@
-aiogram==2.21
-requests
+aiogram>=2.25.1
+requests>=2.31.0
+python-dotenv>=1.0.0
+setuptools>=65.5.1
