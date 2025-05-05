@@ -9,16 +9,18 @@ from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton, \
 from aiogram.utils import executor
 
 # Local modules to work with Database and Ton network
-import config
 import ton
 import db
 
+# إعدادات البوت
+BOT_TOKEN = "7694920024:AAHHN0bosivojMjX82rc69Wu1Uo25uupAVw"
+DEPOSIT_ADDRESS = "UQAEKS9SJGJF0qHNxRFsy3GQHxK4lRO8iERPYJ2jxeaqZGoV"
 
 # Now all the info about bot work will be printed out to console
 logging.basicConfig(level=logging.INFO)
 
 # Initialize the bot and dispatcher
-bot = Bot(token=config.BOT_TOKEN)
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
 
@@ -75,13 +77,13 @@ async def deposit_handler(message: types.Message):
     # Keyboard with deposit URL
     keyboard = InlineKeyboardMarkup()
     button = InlineKeyboardButton('Deposit',
-                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}&text={uid}')
+                                  url=f'ton://transfer/{DEPOSIT_ADDRESS}&text={uid}')
     keyboard.add(button)
 
     # Send text that explains how to make a deposit into bot to user
     await message.answer('It is very easy to top up your balance here.\n'
                          'Simply send any amount of TON to this address:\n\n'
-                         f'`{config.DEPOSIT_ADDRESS}`\n\n'
+                         f'`{DEPOSIT_ADDRESS}`\n\n'
                          f'And include the following comment: `{uid}`\n\n'
                          'You can also deposit by clicking the button below.',
                          reply_markup=keyboard,
@@ -97,3 +99,4 @@ if __name__ == '__main__':
 
     # Launch the bot
     ex.start_polling()
+    
